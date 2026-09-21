@@ -1,0 +1,14 @@
+{
+  "method": "SHA256 of UTF-8 canonical JSON mapping relative POSIX file paths to SHA256; sorted keys, no spaces, ensure_ascii=False; manifest stored outside root",
+  "files": {
+    "README.md": "2f6a5559ac0c9035f5b8b9c06e67a43f66c4f7b57d048a6ff36aac09b90221f3",
+    "hi_IndicNER_v1.0.zip": "051cd8313d55204a84c2e5535147438a8314867c6a772cb45d9f64cb5768fe32",
+    "hi_test.json": "346755991b6835677606586cac7040c86b440b9be02602dbe8d812ae9b8728b0",
+    "hi_train.json": "265a74043c68d3c8e6d8b07014618e7744c6375728d9f4ed3abe1207ee9e1c7e",
+    "hi_val.json": "6c088005d26b2b372c439c0678afb76269e0e4823f1a994aa3b24c3e4655f2a1",
+    "hub_metadata.json": "2aa39c346d484b01e5c12257c0ef7b0c884cdeb1adf9c50dd99e77b590ae4f95",
+    "naamapadam.py": "2a3f64213e34152d862bc2294b45f18d1d839e1165e31fdb551d849770afcb09",
+    "provenance.json": "ed12aef985f61d4f0f079452b4c8d6727dcf7b7651962bbf6a12cd5f994b8980"
+  },
+  "combined_sha256": "ff9854a573973de7247660851f614b530395981580aaebf28dde9485e1c1f581"
+}

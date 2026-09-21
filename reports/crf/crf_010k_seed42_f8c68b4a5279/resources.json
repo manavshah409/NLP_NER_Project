@@ -1,0 +1,12 @@
+{
+  "memory_total_bytes": 25769803776,
+  "memory_available_bytes": 9384542208,
+  "maximum_memory_bytes": 5630725324,
+  "minimum_available_bytes": 2576980377,
+  "reason": "Budget=min(50% physical RAM,60% available RAM); stop at 90% budget or below 10% physical RAM available",
+  "peak_rss_bytes_sampled": 449953792,
+  "polling_seconds": 0.25,
+  "elapsed_seconds": 64.16287941701012,
+  "memory_limit_interruption": false,
+  "exit_code": 0
+}

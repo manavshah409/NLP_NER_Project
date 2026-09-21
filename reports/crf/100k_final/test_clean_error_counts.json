@@ -1,0 +1,17 @@
+{
+  "counts": {
+    "correct_entities": 849,
+    "boundary_errors": 114,
+    "missed_entities": 141,
+    "false_positive_entities": 100,
+    "PER/ORG_confusion": 21,
+    "PER/LOC_confusion": 17,
+    "ORG/LOC_confusion": 27,
+    "unseen_entity_tokens": 162,
+    "abbreviations_acronyms": 13,
+    "mixed_script_tokens": 0,
+    "numeric_punctuation_adjacent": 264,
+    "headline_like_short_sequences": 66
+  },
+  "definitions": "Counts overlap; correct/boundary/missed/FP count spans, confusion counts overlapping span pairs, slices count gold entities except <=10-token short sequences count records. Abbreviations and headline-like sequences are heuristic categories. No test-driven tuning permitted."
+}

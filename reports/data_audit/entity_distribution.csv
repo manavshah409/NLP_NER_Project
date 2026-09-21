@@ -1,0 +1,10 @@
+split,label,count
+train,PER,767003
+train,ORG,686388
+train,LOC,731183
+validation,PER,10549
+validation,ORG,9735
+validation,LOC,10209
+test,PER,788
+test,ORG,521
+test,LOC,613

@@ -1,0 +1,15 @@
+{
+  "finished_at": "2026-09-08T17:32:27.442504+00:00",
+  "inference_passes": 1,
+  "saved_predictions_replayed": true,
+  "freeze_verified_before_after": true,
+  "files": {
+    "reports/crf/100k_final/test_clean_predictions.jsonl": "37780fa96419e6ad3af2fb7008b8b7643b197bcc9c5f401df6f264d20e23ccbb",
+    "reports/crf/100k_final/test_clean_metrics.json": "509beb13e13aecd392c743402e7cefdd08c549ce31f35ad729ce0df7c415dcd2",
+    "reports/crf/100k_final/test_clean_error_counts.json": "7b3df43b03beab7956178b83277ff3beb7f7cc05307af518516e4a94ec60e7b1",
+    "reports/crf/100k_final/test_clean_report.md": "9000f6b650a5225d2f3fc836e28ef53df275b4f7484e8438275fd2a2c72a1540",
+    "reports/crf/100k_final/test_clean_started.json": "d5db965eb2c08b62e76391f4f3f46df269dc12fdb63f94efb3adf3e8bb396644",
+    "reports/crf/100k_final/restricted_examples/test_clean_error_examples.md": "87261ff64b2484587ba2bc0b9e6e1e48080e4fd2c8974f514f8906b3b4dd79f7",
+    "reports/crf/100k_final/restricted_examples/test_clean_error_examples.json": "56561d4a529cb4669be27b827033de917a17a0046b74903bba85a7bbff8a81b5"
+  }
+}

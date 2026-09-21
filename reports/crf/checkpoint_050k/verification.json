@@ -1,0 +1,17 @@
+{
+  "crf_001k_seed42_8a804a38f625": {
+    "artifacts_checksums_valid": true,
+    "experiment_id_reproduced": true,
+    "native_model_reload_consistent": true
+  },
+  "crf_010k_seed42_f8c68b4a5279": {
+    "artifacts_checksums_valid": true,
+    "experiment_id_reproduced": true,
+    "native_model_reload_consistent": true
+  },
+  "crf_050k_seed42_3138567c5c8e": {
+    "artifacts_checksums_valid": true,
+    "experiment_id_reproduced": true,
+    "native_model_reload_consistent": true
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "url": "http://127.0.0.1:8501",
+  "page_loaded": true,
+  "example_selection": true,
+  "input_populated": true,
+  "empty_input_error": true,
+  "extraction": true,
+  "highlighting": true,
+  "entity_table": true,
+  "summary_counts": true,
+  "json_download_event": true,
+  "csv_download_event": true,
+  "offline_model_panel": true,
+  "automated_app_tests_cover": "Clear, input length limit, no-entity state and download control presence",
+  "screenshots": [
+    "docs/demo/screenshots/01_initial.png",
+    "docs/demo/screenshots/02_filled_input.png",
+    "docs/demo/screenshots/03_highlighted_output.png",
+    "docs/demo/screenshots/04_entity_table.png",
+    "docs/demo/screenshots/05_model_information.png"
+  ],
+  "note": "Screenshots are actual browser captures. Browser viewport changed during verification; no image was fabricated or edited."
+}

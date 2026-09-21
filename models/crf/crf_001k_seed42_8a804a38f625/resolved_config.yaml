@@ -1,0 +1,47 @@
+experiment:
+  name: crf_baseline
+  seed: 42
+data:
+  version: naamapadam_hi_crf_v1
+  train_split: train_clean
+  validation_split: validation_clean
+  sample_size: 1000
+  sample_manifest: experiments/crf/manifests/train_001k_seed42.json
+  data_config: configs/data/naamapadam_hi.yaml
+features:
+  context_window: 1
+  prefixes:
+  - 1
+  - 2
+  - 3
+  suffixes:
+  - 1
+  - 2
+  - 3
+  token_shape: true
+  script_features: true
+  gazetteers: false
+model:
+  algorithm: lbfgs
+  c1: 0.1
+  c2: 0.1
+  max_iterations: 100
+  all_possible_transitions: true
+evaluation:
+  primary_metric: strict_entity_micro_f1
+  token_accuracy_secondary: true
+  max_examples_per_category: 10
+resources:
+  maximum_memory_gb: 5.407830835
+  stop_on_memory_limit: true
+  polling_seconds: 0.25
+  stop_fraction: 0.9
+  resolved_policy:
+    memory_total_bytes: 25769803776
+    memory_available_bytes: 9013051392
+    maximum_memory_bytes: 5407830835
+    minimum_available_bytes: 2576980377
+    reason: Budget=min(50% physical RAM,60% available RAM); stop at 90% budget or
+      below 10% physical RAM available
+experiment_id: crf_001k_seed42_8a804a38f625
+report_dir: reports/crf/crf_001k_seed42_8a804a38f625

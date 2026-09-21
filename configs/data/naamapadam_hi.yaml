@@ -1,0 +1,9 @@
+dataset_id: ai4bharat/naamapadam
+configuration: hi
+revision: main
+raw_dir: data/raw/naamapadam_hi
+derived_dir: data/derived/naamapadam_hi_crf_v1
+derived_version: naamapadam_hi_crf_v1
+audit_dir: reports/data_audit
+derived_report_dir: reports/derived_data
+normalised_text_policy: NFC each token, join with one space, collapse whitespace; case preserved

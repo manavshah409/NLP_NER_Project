@@ -1,0 +1,16 @@
+{
+  "tests": 110,
+  "passed": 110,
+  "failed": 0,
+  "skipped": 0,
+  "errors": 0,
+  "frozen_files_verified": 51,
+  "pip_check": "passed",
+  "json_download_event": true,
+  "csv_download_event": true,
+  "screenshot": "docs/demo/screenshots/06_json_csv_export.png",
+  "remote_initially_empty": true,
+  "model_binary_redistributed": false,
+  "test_inference_rerun": false,
+  "restricted_examples_opened": false
+}

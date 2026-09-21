@@ -1,0 +1,167 @@
+{
+  "train": {
+    "before": {
+      "records": 985787,
+      "tokens": 22029408,
+      "entity_spans": {
+        "PER": 767003,
+        "ORG": 686388,
+        "LOC": 731183
+      },
+      "label_tokens": {
+        "O": 18099478,
+        "B-PER": 767003,
+        "I-PER": 712403,
+        "B-ORG": 686388,
+        "I-ORG": 825713,
+        "B-LOC": 731183,
+        "I-LOC": 207240
+      },
+      "errors": {
+        "type_mismatch_I": 5513
+      }
+    },
+    "after": {
+      "records": 963174,
+      "tokens": 21483205,
+      "entity_spans": {
+        "PER": 751157,
+        "ORG": 672911,
+        "LOC": 711267
+      },
+      "label_tokens": {
+        "O": 17651946,
+        "B-PER": 751157,
+        "I-PER": 696418,
+        "B-ORG": 672911,
+        "I-ORG": 798420,
+        "B-LOC": 711267,
+        "I-LOC": 201086
+      },
+      "errors": {}
+    },
+    "raw_exact_duplicate_copies": 22613,
+    "clean_exact_duplicate_copies": 0,
+    "raw_valid_BIO_tag_positions": 22023895,
+    "clean_valid_BIO_tag_positions": 21483205
+  },
+  "validation": {
+    "before": {
+      "records": 13460,
+      "tokens": 304282,
+      "entity_spans": {
+        "PER": 10549,
+        "ORG": 9735,
+        "LOC": 10209
+      },
+      "label_tokens": {
+        "O": 249634,
+        "B-PER": 10549,
+        "I-PER": 9870,
+        "B-ORG": 9735,
+        "I-ORG": 11506,
+        "B-LOC": 10209,
+        "I-LOC": 2779
+      },
+      "errors": {
+        "type_mismatch_I": 74
+      }
+    },
+    "after": {
+      "records": 12896,
+      "tokens": 289695,
+      "entity_spans": {
+        "PER": 10097,
+        "ORG": 9329,
+        "LOC": 9677
+      },
+      "label_tokens": {
+        "O": 237682,
+        "B-PER": 10097,
+        "I-PER": 9402,
+        "B-ORG": 9329,
+        "I-ORG": 10876,
+        "B-LOC": 9677,
+        "I-LOC": 2632
+      },
+      "errors": {}
+    },
+    "raw_exact_duplicate_copies": 5,
+    "clean_exact_duplicate_copies": 0,
+    "raw_valid_BIO_tag_positions": 304208,
+    "clean_valid_BIO_tag_positions": 289695
+  },
+  "test": {
+    "before": {
+      "records": 867,
+      "tokens": 19893,
+      "entity_spans": {
+        "PER": 788,
+        "ORG": 521,
+        "LOC": 613
+      },
+      "label_tokens": {
+        "O": 16513,
+        "B-PER": 788,
+        "I-PER": 747,
+        "B-ORG": 521,
+        "I-ORG": 512,
+        "B-LOC": 613,
+        "I-LOC": 199
+      },
+      "errors": {
+        "orphan_I": 5,
+        "empty_record": 3,
+        "type_mismatch_I": 2
+      }
+    },
+    "after": {
+      "records": 506,
+      "tokens": 12388,
+      "entity_spans": {
+        "PER": 547,
+        "ORG": 287,
+        "LOC": 332
+      },
+      "label_tokens": {
+        "O": 10306,
+        "B-PER": 547,
+        "I-PER": 522,
+        "B-ORG": 287,
+        "I-ORG": 285,
+        "B-LOC": 332,
+        "I-LOC": 109
+      },
+      "errors": {}
+    },
+    "raw_exact_duplicate_copies": 3,
+    "clean_exact_duplicate_copies": 0,
+    "raw_valid_BIO_tag_positions": 19886,
+    "clean_valid_BIO_tag_positions": 12388
+  },
+  "cross_split_overlap": {
+    "before": {
+      "train--validation": {
+        "unique_texts": 559,
+        "earlier_split_records": 690,
+        "later_split_records": 559
+      },
+      "train--test": {
+        "unique_texts": 16,
+        "earlier_split_records": 20,
+        "later_split_records": 16
+      },
+      "validation--test": {
+        "unique_texts": 357,
+        "earlier_split_records": 357,
+        "later_split_records": 357
+      }
+    },
+    "after_unique_texts": {
+      "train--validation": 0,
+      "train--test": 0,
+      "validation--test": 0
+    }
+  },
+  "definition": "Valid BIO tag positions includes O and B as well as valid I. Zero clean duplicate/overlap counts are supported by successful exhaustive integrity assertions. Structural raw failures are absent."
+}

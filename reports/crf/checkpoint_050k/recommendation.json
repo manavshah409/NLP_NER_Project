@@ -1,0 +1,6 @@
+{
+  "recommendation": "100,000 records",
+  "micro_f1_gain_10k_to_50k": 0.05614690319042659,
+  "peak_rss_fraction_of_budget_50k": 0.29197810183474054,
+  "larger_run_started": false
+}

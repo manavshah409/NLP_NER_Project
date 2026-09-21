@@ -1,0 +1,9 @@
+{
+  "experiment": "crf_100k_seed42_24dd05e84a26",
+  "model_sha256": "80395321d26b43076c01cdbea5d3d729159ef3581ca9fdec1214d3cec92cac5c",
+  "matches_freeze": true,
+  "model_size_bytes": 22707636,
+  "frozen_runtime_verified": true,
+  "frozen_package_versions_unchanged": true,
+  "verification_scope": "Frozen runtime subset only; dataset and test prediction files are not opened"
+}

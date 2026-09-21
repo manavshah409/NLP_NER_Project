@@ -1,0 +1,42 @@
+{
+  "strict_entity_precision": 0.7266969004160264,
+  "strict_entity_recall": 0.6662199773219256,
+  "strict_entity_micro_f1": 0.6951455614513122,
+  "strict_entity_macro_f1": 0.6908534298747618,
+  "per_class": {
+    "PER": {
+      "precision": 0.7499213918876428,
+      "recall": 0.7086263246508864,
+      "f1": 0.7286892758936755,
+      "true_positive": 7155,
+      "predicted": 9541,
+      "support": 10097
+    },
+    "ORG": {
+      "precision": 0.6516297262059974,
+      "recall": 0.5357487404866546,
+      "f1": 0.5880345902700159,
+      "true_positive": 4998,
+      "predicted": 7670,
+      "support": 9329
+    },
+    "LOC": {
+      "precision": 0.7640971488912355,
+      "recall": 0.7477524026041128,
+      "f1": 0.7558364234605943,
+      "true_positive": 7236,
+      "predicted": 9470,
+      "support": 9677
+    }
+  },
+  "token_accuracy": 0.9209617010994322,
+  "tokens": 289695,
+  "policy": "Only B starts a span; exact boundaries and type; macro includes all 3 types",
+  "validation_records": 12896,
+  "inference_seconds": 7.594233271287521,
+  "evaluation_wall_seconds": 8.187554000003729,
+  "median_sentence_latency_ms": 0.5193539982428774,
+  "p95_sentence_latency_ms": 1.261510005861055,
+  "peak_inference_rss_bytes_sentence_sampled": 1545388032,
+  "latency_definition": "Feature extraction plus tag call per sentence; excludes disk read, metric and error analysis; no warmup excluded"
+}

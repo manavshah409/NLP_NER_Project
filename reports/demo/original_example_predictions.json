@@ -1,0 +1,715 @@
+{
+  "Person and place": {
+    "text": "मीरा शर्मा ने जयपुर में पुस्तक प्रदर्शनी देखी।",
+    "model": "crf_100k_seed42_24dd05e84a26",
+    "dataset_version": "naamapadam_hi_crf_v1",
+    "processed_at": "2026-09-08T18:17:54.209701+00:00",
+    "entities": [
+      {
+        "text": "मीरा शर्मा",
+        "type": "PER",
+        "start_char": 0,
+        "end_char": 10,
+        "start_token": 0,
+        "end_token": 2,
+        "bio_sequence": [
+          "B-PER",
+          "I-PER"
+        ],
+        "confidence": 0.9701367612574809
+      },
+      {
+        "text": "जयपुर",
+        "type": "LOC",
+        "start_char": 14,
+        "end_char": 19,
+        "start_token": 3,
+        "end_token": 4,
+        "bio_sequence": [
+          "B-LOC"
+        ],
+        "confidence": 0.9413280666059318
+      }
+    ],
+    "tokens": [
+      {
+        "text": "मीरा",
+        "start_char": 0,
+        "end_char": 4,
+        "index": 0,
+        "bio": "B-PER",
+        "predicted_tag_marginal": 0.990473889170148
+      },
+      {
+        "text": "शर्मा",
+        "start_char": 5,
+        "end_char": 10,
+        "index": 1,
+        "bio": "I-PER",
+        "predicted_tag_marginal": 0.9497996333448139
+      },
+      {
+        "text": "ने",
+        "start_char": 11,
+        "end_char": 13,
+        "index": 2,
+        "bio": "O",
+        "predicted_tag_marginal": 0.995876615591995
+      },
+      {
+        "text": "जयपुर",
+        "start_char": 14,
+        "end_char": 19,
+        "index": 3,
+        "bio": "B-LOC",
+        "predicted_tag_marginal": 0.9413280666059318
+      },
+      {
+        "text": "में",
+        "start_char": 20,
+        "end_char": 23,
+        "index": 4,
+        "bio": "O",
+        "predicted_tag_marginal": 0.9996217120675853
+      },
+      {
+        "text": "पुस्तक",
+        "start_char": 24,
+        "end_char": 30,
+        "index": 5,
+        "bio": "O",
+        "predicted_tag_marginal": 0.9988557779318228
+      },
+      {
+        "text": "प्रदर्शनी",
+        "start_char": 31,
+        "end_char": 40,
+        "index": 6,
+        "bio": "O",
+        "predicted_tag_marginal": 0.9960488662503116
+      },
+      {
+        "text": "देखी",
+        "start_char": 41,
+        "end_char": 45,
+        "index": 7,
+        "bio": "O",
+        "predicted_tag_marginal": 0.9937107318020874
+      },
+      {
+        "text": "।",
+        "start_char": 45,
+        "end_char": 46,
+        "index": 8,
+        "bio": "O",
+        "predicted_tag_marginal": 0.9999930893102004
+      }
+    ],
+    "predicted_bio_sequence": [
+      "B-PER",
+      "I-PER",
+      "O",
+      "B-LOC",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ],
+    "offset_convention": "Zero-based Python Unicode code-point offsets; character and token ends are exclusive. Token indices are global across the input.",
+    "confidence_definition": "Arithmetic mean of CRFsuite marginal probabilities for the entity's predicted token tags. Not calibrated entity correctness or factual truth.",
+    "limitations": "Hindi CRF; Naamapadam is multi-domain, not verified current Indian-news performance. Raw-text tokenisation differs from benchmark tokenisation. No English support is claimed."
+  },
+  "Organisation and place": {
+    "text": "भारतीय स्टेट बैंक ने भोपाल में नई शाखा खोली।",
+    "model": "crf_100k_seed42_24dd05e84a26",
+    "dataset_version": "naamapadam_hi_crf_v1",
+    "processed_at": "2026-09-08T18:17:54.243783+00:00",
+    "entities": [
+      {
+        "text": "भारतीय स्टेट बैंक",
+        "type": "ORG",
+        "start_char": 0,
+        "end_char": 17,
+        "start_token": 0,
+        "end_token": 3,
+        "bio_sequence": [
+          "B-ORG",
+          "I-ORG",
+          "I-ORG"
+        ],
+        "confidence": 0.8323997048704826
+      },
+      {
+        "text": "भोपाल",
+        "type": "LOC",
+        "start_char": 21,
+        "end_char": 26,
+        "start_token": 4,
+        "end_token": 5,
+        "bio_sequence": [
+          "B-LOC"
+        ],
+        "confidence": 0.9172448985164184
+      }
+    ],
+    "tokens": [
+      {
+        "text": "भारतीय",
+        "start_char": 0,
+        "end_char": 6,
+        "index": 0,
+        "bio": "B-ORG",
+        "predicted_tag_marginal": 0.8351618737971449
+      },
+      {
+        "text": "स्टेट",
+        "start_char": 7,
+        "end_char": 12,
+        "index": 1,
+        "bio": "I-ORG",
+        "predicted_tag_marginal": 0.8184625885103552
+      },
+      {
+        "text": "बैंक",
+        "start_char": 13,
+        "end_char": 17,
+        "index": 2,
+        "bio": "I-ORG",
+        "predicted_tag_marginal": 0.8435746523039478
+      },
+      {
+        "text": "ने",
+        "start_char": 18,
+        "end_char": 20,
+        "index": 3,
+        "bio": "O",
+        "predicted_tag_marginal": 0.9881264614144036
+      },
+      {
+        "text": "भोपाल",
+        "start_char": 21,
+        "end_char": 26,
+        "index": 4,
+        "bio": "B-LOC",
+        "predicted_tag_marginal": 0.9172448985164184
+      },
+      {
+        "text": "में",
+        "start_char": 27,
+        "end_char": 30,
+        "index": 5,
+        "bio": "O",
+        "predicted_tag_marginal": 0.9958398048647734
+      },
+      {
+        "text": "नई",
+        "start_char": 31,
+        "end_char": 33,
+        "index": 6,
+        "bio": "O",
+        "predicted_tag_marginal": 0.8926308323846476
+      },
+      {
+        "text": "शाखा",
+        "start_char": 34,
+        "end_char": 38,
+        "index": 7,
+        "bio": "O",
+        "predicted_tag_marginal": 0.9529961653289853
+      },
+      {
+        "text": "खोली",
+        "start_char": 39,
+        "end_char": 43,
+        "index": 8,
+        "bio": "O",
+        "predicted_tag_marginal": 0.9958388597360148
+      },
+      {
+        "text": "।",
+        "start_char": 43,
+        "end_char": 44,
+        "index": 9,
+        "bio": "O",
+        "predicted_tag_marginal": 0.9999885748192924
+      }
+    ],
+    "predicted_bio_sequence": [
+      "B-ORG",
+      "I-ORG",
+      "I-ORG",
+      "O",
+      "B-LOC",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ],
+    "offset_convention": "Zero-based Python Unicode code-point offsets; character and token ends are exclusive. Token indices are global across the input.",
+    "confidence_definition": "Arithmetic mean of CRFsuite marginal probabilities for the entity's predicted token tags. Not calibrated entity correctness or factual truth.",
+    "limitations": "Hindi CRF; Naamapadam is multi-domain, not verified current Indian-news performance. Raw-text tokenisation differs from benchmark tokenisation. No English support is claimed."
+  },
+  "Multiple entities": {
+    "text": "राहुल वर्मा और नेहा गुप्ता सोमवार को मुंबई से पुणे गए।",
+    "model": "crf_100k_seed42_24dd05e84a26",
+    "dataset_version": "naamapadam_hi_crf_v1",
+    "processed_at": "2026-09-08T18:17:54.277751+00:00",
+    "entities": [
+      {
+        "text": "राहुल वर्मा",
+        "type": "PER",
+        "start_char": 0,
+        "end_char": 11,
+        "start_token": 0,
+        "end_token": 2,
+        "bio_sequence": [
+          "B-PER",
+          "I-PER"
+        ],
+        "confidence": 0.977343160288995
+      },
+      {
+        "text": "नेहा गुप्ता",
+        "type": "PER",
+        "start_char": 15,
+        "end_char": 26,
+        "start_token": 3,
+        "end_token": 5,
+        "bio_sequence": [
+          "B-PER",
+          "I-PER"
+        ],
+        "confidence": 0.9247047944709303
+      },
+      {
+        "text": "मुंबई",
+        "type": "LOC",
+        "start_char": 37,
+        "end_char": 42,
+        "start_token": 7,
+        "end_token": 8,
+        "bio_sequence": [
+          "B-LOC"
+        ],
+        "confidence": 0.9093097535441336
+      },
+      {
+        "text": "पुणे",
+        "type": "LOC",
+        "start_char": 46,
+        "end_char": 50,
+        "start_token": 9,
+        "end_token": 10,
+        "bio_sequence": [
+          "B-LOC"
+        ],
+        "confidence": 0.9340939690007026
+      }
+    ],
+    "tokens": [
+      {
+        "text": "राहुल",
+        "start_char": 0,
+        "end_char": 5,
+        "index": 0,
+        "bio": "B-PER",
+        "predicted_tag_marginal": 0.9892314143317604
+      },
+      {
+        "text": "वर्मा",
+        "start_char": 6,
+        "end_char": 11,
+        "index": 1,
+        "bio": "I-PER",
+        "predicted_tag_marginal": 0.9654549062462295
+      },
+      {
+        "text": "और",
+        "start_char": 12,
+        "end_char": 14,
+        "index": 2,
+        "bio": "O",
+        "predicted_tag_marginal": 0.9992356135742364
+      },
+      {
+        "text": "नेहा",
+        "start_char": 15,
+        "end_char": 19,
+        "index": 3,
+        "bio": "B-PER",
+        "predicted_tag_marginal": 0.9768476335463718
+      },
+      {
+        "text": "गुप्ता",
+        "start_char": 20,
+        "end_char": 26,
+        "index": 4,
+        "bio": "I-PER",
+        "predicted_tag_marginal": 0.8725619553954888
+      },
+      {
+        "text": "सोमवार",
+        "start_char": 27,
+        "end_char": 33,
+        "index": 5,
+        "bio": "O",
+        "predicted_tag_marginal": 0.9580616871314992
+      },
+      {
+        "text": "को",
+        "start_char": 34,
+        "end_char": 36,
+        "index": 6,
+        "bio": "O",
+        "predicted_tag_marginal": 0.9997172930224566
+      },
+      {
+        "text": "मुंबई",
+        "start_char": 37,
+        "end_char": 42,
+        "index": 7,
+        "bio": "B-LOC",
+        "predicted_tag_marginal": 0.9093097535441336
+      },
+      {
+        "text": "से",
+        "start_char": 43,
+        "end_char": 45,
+        "index": 8,
+        "bio": "O",
+        "predicted_tag_marginal": 0.9916065796573609
+      },
+      {
+        "text": "पुणे",
+        "start_char": 46,
+        "end_char": 50,
+        "index": 9,
+        "bio": "B-LOC",
+        "predicted_tag_marginal": 0.9340939690007026
+      },
+      {
+        "text": "गए",
+        "start_char": 51,
+        "end_char": 53,
+        "index": 10,
+        "bio": "O",
+        "predicted_tag_marginal": 0.996974221127772
+      },
+      {
+        "text": "।",
+        "start_char": 53,
+        "end_char": 54,
+        "index": 11,
+        "bio": "O",
+        "predicted_tag_marginal": 0.9999447730803763
+      }
+    ],
+    "predicted_bio_sequence": [
+      "B-PER",
+      "I-PER",
+      "O",
+      "B-PER",
+      "I-PER",
+      "O",
+      "O",
+      "B-LOC",
+      "O",
+      "B-LOC",
+      "O",
+      "O"
+    ],
+    "offset_convention": "Zero-based Python Unicode code-point offsets; character and token ends are exclusive. Token indices are global across the input.",
+    "confidence_definition": "Arithmetic mean of CRFsuite marginal probabilities for the entity's predicted token tags. Not calibrated entity correctness or factual truth.",
+    "limitations": "Hindi CRF; Naamapadam is multi-domain, not verified current Indian-news performance. Raw-text tokenisation differs from benchmark tokenisation. No English support is claimed."
+  },
+  "Punctuation and lines": {
+    "text": "‘अनिता राव’, लखनऊ पहुंचीं।\nउन्होंने कहा: बैठक कल होगी!",
+    "model": "crf_100k_seed42_24dd05e84a26",
+    "dataset_version": "naamapadam_hi_crf_v1",
+    "processed_at": "2026-09-08T18:17:54.314255+00:00",
+    "entities": [
+      {
+        "text": "अनिता राव",
+        "type": "PER",
+        "start_char": 1,
+        "end_char": 10,
+        "start_token": 1,
+        "end_token": 3,
+        "bio_sequence": [
+          "B-PER",
+          "I-PER"
+        ],
+        "confidence": 0.9961258017319448
+      },
+      {
+        "text": "लखनऊ",
+        "type": "LOC",
+        "start_char": 13,
+        "end_char": 17,
+        "start_token": 5,
+        "end_token": 6,
+        "bio_sequence": [
+          "B-LOC"
+        ],
+        "confidence": 0.9753205785691778
+      }
+    ],
+    "tokens": [
+      {
+        "text": "‘",
+        "start_char": 0,
+        "end_char": 1,
+        "index": 0,
+        "bio": "O",
+        "predicted_tag_marginal": 0.999529561780441
+      },
+      {
+        "text": "अनिता",
+        "start_char": 1,
+        "end_char": 6,
+        "index": 1,
+        "bio": "B-PER",
+        "predicted_tag_marginal": 0.9986235674568332
+      },
+      {
+        "text": "राव",
+        "start_char": 7,
+        "end_char": 10,
+        "index": 2,
+        "bio": "I-PER",
+        "predicted_tag_marginal": 0.9936280360070563
+      },
+      {
+        "text": "’",
+        "start_char": 10,
+        "end_char": 11,
+        "index": 3,
+        "bio": "O",
+        "predicted_tag_marginal": 0.9026825223752846
+      },
+      {
+        "text": ",",
+        "start_char": 11,
+        "end_char": 12,
+        "index": 4,
+        "bio": "O",
+        "predicted_tag_marginal": 0.9985215397032033
+      },
+      {
+        "text": "लखनऊ",
+        "start_char": 13,
+        "end_char": 17,
+        "index": 5,
+        "bio": "B-LOC",
+        "predicted_tag_marginal": 0.9753205785691778
+      },
+      {
+        "text": "पहुंचीं",
+        "start_char": 18,
+        "end_char": 25,
+        "index": 6,
+        "bio": "O",
+        "predicted_tag_marginal": 0.9995126182525094
+      },
+      {
+        "text": "।",
+        "start_char": 25,
+        "end_char": 26,
+        "index": 7,
+        "bio": "O",
+        "predicted_tag_marginal": 0.999996583699787
+      },
+      {
+        "text": "उन्होंने",
+        "start_char": 27,
+        "end_char": 35,
+        "index": 8,
+        "bio": "O",
+        "predicted_tag_marginal": 0.9592989770658196
+      },
+      {
+        "text": "कहा",
+        "start_char": 36,
+        "end_char": 39,
+        "index": 9,
+        "bio": "O",
+        "predicted_tag_marginal": 0.9996488598437455
+      },
+      {
+        "text": ":",
+        "start_char": 39,
+        "end_char": 40,
+        "index": 10,
+        "bio": "O",
+        "predicted_tag_marginal": 0.999796813735953
+      },
+      {
+        "text": "बैठक",
+        "start_char": 41,
+        "end_char": 45,
+        "index": 11,
+        "bio": "O",
+        "predicted_tag_marginal": 0.9872033097364412
+      },
+      {
+        "text": "कल",
+        "start_char": 46,
+        "end_char": 48,
+        "index": 12,
+        "bio": "O",
+        "predicted_tag_marginal": 0.9983349954501106
+      },
+      {
+        "text": "होगी",
+        "start_char": 49,
+        "end_char": 53,
+        "index": 13,
+        "bio": "O",
+        "predicted_tag_marginal": 0.9916179728341086
+      },
+      {
+        "text": "!",
+        "start_char": 53,
+        "end_char": 54,
+        "index": 14,
+        "bio": "O",
+        "predicted_tag_marginal": 0.9930215700372886
+      }
+    ],
+    "predicted_bio_sequence": [
+      "O",
+      "B-PER",
+      "I-PER",
+      "O",
+      "O",
+      "B-LOC",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ],
+    "offset_convention": "Zero-based Python Unicode code-point offsets; character and token ends are exclusive. Token indices are global across the input.",
+    "confidence_definition": "Arithmetic mean of CRFsuite marginal probabilities for the entity's predicted token tags. Not calibrated entity correctness or factual truth.",
+    "limitations": "Hindi CRF; Naamapadam is multi-domain, not verified current Indian-news performance. Raw-text tokenisation differs from benchmark tokenisation. No English support is claimed."
+  },
+  "Everyday sentence": {
+    "text": "आज मौसम सुहावना है और हल्की हवा चल रही है।",
+    "model": "crf_100k_seed42_24dd05e84a26",
+    "dataset_version": "naamapadam_hi_crf_v1",
+    "processed_at": "2026-09-08T18:17:54.352872+00:00",
+    "entities": [],
+    "tokens": [
+      {
+        "text": "आज",
+        "start_char": 0,
+        "end_char": 2,
+        "index": 0,
+        "bio": "O",
+        "predicted_tag_marginal": 0.9991201093826185
+      },
+      {
+        "text": "मौसम",
+        "start_char": 3,
+        "end_char": 7,
+        "index": 1,
+        "bio": "O",
+        "predicted_tag_marginal": 0.993458347410289
+      },
+      {
+        "text": "सुहावना",
+        "start_char": 8,
+        "end_char": 15,
+        "index": 2,
+        "bio": "O",
+        "predicted_tag_marginal": 0.9970673818707347
+      },
+      {
+        "text": "है",
+        "start_char": 16,
+        "end_char": 18,
+        "index": 3,
+        "bio": "O",
+        "predicted_tag_marginal": 0.9996946644993876
+      },
+      {
+        "text": "और",
+        "start_char": 19,
+        "end_char": 21,
+        "index": 4,
+        "bio": "O",
+        "predicted_tag_marginal": 0.9996515588146536
+      },
+      {
+        "text": "हल्की",
+        "start_char": 22,
+        "end_char": 27,
+        "index": 5,
+        "bio": "O",
+        "predicted_tag_marginal": 0.970512084910568
+      },
+      {
+        "text": "हवा",
+        "start_char": 28,
+        "end_char": 31,
+        "index": 6,
+        "bio": "O",
+        "predicted_tag_marginal": 0.9820015449711643
+      },
+      {
+        "text": "चल",
+        "start_char": 32,
+        "end_char": 34,
+        "index": 7,
+        "bio": "O",
+        "predicted_tag_marginal": 0.9898578291319088
+      },
+      {
+        "text": "रही",
+        "start_char": 35,
+        "end_char": 38,
+        "index": 8,
+        "bio": "O",
+        "predicted_tag_marginal": 0.991579495646495
+      },
+      {
+        "text": "है",
+        "start_char": 39,
+        "end_char": 41,
+        "index": 9,
+        "bio": "O",
+        "predicted_tag_marginal": 0.9985748247802831
+      },
+      {
+        "text": "।",
+        "start_char": 41,
+        "end_char": 42,
+        "index": 10,
+        "bio": "O",
+        "predicted_tag_marginal": 0.999898082180497
+      }
+    ],
+    "predicted_bio_sequence": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ],
+    "offset_convention": "Zero-based Python Unicode code-point offsets; character and token ends are exclusive. Token indices are global across the input.",
+    "confidence_definition": "Arithmetic mean of CRFsuite marginal probabilities for the entity's predicted token tags. Not calibrated entity correctness or factual truth.",
+    "limitations": "Hindi CRF; Naamapadam is multi-domain, not verified current Indian-news performance. Raw-text tokenisation differs from benchmark tokenisation. No English support is claimed."
+  }
+}

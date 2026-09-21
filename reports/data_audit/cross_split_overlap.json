@@ -1,0 +1,17 @@
+{
+  "train--validation": {
+    "unique_texts": 559,
+    "earlier_split_records": 690,
+    "later_split_records": 559
+  },
+  "train--test": {
+    "unique_texts": 16,
+    "earlier_split_records": 20,
+    "later_split_records": 16
+  },
+  "validation--test": {
+    "unique_texts": 357,
+    "earlier_split_records": 357,
+    "later_split_records": 357
+  }
+}

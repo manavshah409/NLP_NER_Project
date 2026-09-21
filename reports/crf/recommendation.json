@@ -1,0 +1,6 @@
+{
+  "recommendation": "Stop at the current scale",
+  "micro_f1_gain_50k_to_100k": 0.018624166143300203,
+  "peak_rss_fraction_of_budget_100k": 0.5177510396200706,
+  "larger_run_started": false
+}

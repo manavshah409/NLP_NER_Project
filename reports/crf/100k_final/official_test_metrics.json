@@ -1,0 +1,48 @@
+{
+  "strict_entity_precision": 0.7877125617114646,
+  "strict_entity_recall": 0.7471383975026015,
+  "strict_entity_micro_f1": 0.7668891855807745,
+  "strict_entity_macro_f1": 0.759028464447343,
+  "per_class": {
+    "PER": {
+      "precision": 0.8192612137203166,
+      "recall": 0.7880710659898477,
+      "f1": 0.8033635187580853,
+      "true_positive": 621,
+      "predicted": 758,
+      "support": 788
+    },
+    "ORG": {
+      "precision": 0.6983805668016194,
+      "recall": 0.6621880998080614,
+      "f1": 0.6798029556650246,
+      "true_positive": 345,
+      "predicted": 494,
+      "support": 521
+    },
+    "LOC": {
+      "precision": 0.8231173380035026,
+      "recall": 0.766721044045677,
+      "f1": 0.7939189189189189,
+      "true_positive": 470,
+      "predicted": 571,
+      "support": 613
+    }
+  },
+  "token_accuracy": 0.9425426029256523,
+  "tokens": 19893,
+  "policy": "Only B starts a span; exact boundaries and type; macro includes all 3 types",
+  "split": "official_test",
+  "records": 867,
+  "empty_records": 3,
+  "inference_seconds": 0.532870389695745,
+  "evaluation_wall_seconds": 0.5899787920061499,
+  "median_sentence_latency_ms": 0.5502920248545706,
+  "p95_sentence_latency_ms": 1.2932710989844052,
+  "model_size_bytes": 22707636,
+  "peak_inference_rss_bytes_sentence_sampled": 93929472,
+  "latency_definition": "Feature extraction plus tagging; includes empty records, excludes model load, file IO, scoring and error analysis; no warmup excluded",
+  "memory_definition": "Whole process RSS sampled after each record, including model, training vocabulary, metrics and bounded examples; not exact high-water memory",
+  "freeze_payload_sha256": "d9be51a8460b68dd51265f806f3ed2cb361168cc0db5006b2b42fb4eb780df88",
+  "evaluation_policy": "Strict B-only typed spans, exact boundaries, fixed 3-class macro F1. Preserve raw official BIO; include empty official records with empty predictions. No test-time repair."
+}

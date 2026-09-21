@@ -1,0 +1,8 @@
+{
+  "files_checked": 175,
+  "json_parsed": 74,
+  "markdown_checked": 26,
+  "issues": [],
+  "credential_scan": "No common credential patterns detected; heuristic scan is not a guarantee",
+  "artifact_exclusions": "No datasets, model binaries, test predictions or restricted examples in candidate set"
+}

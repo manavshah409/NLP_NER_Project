@@ -1,0 +1,70 @@
+{
+  "reviewed_files": [
+    ".streamlit/config.toml",
+    "CHANGELOG.md",
+    "README.md",
+    "app.py",
+    "docs/demo/CRF_DEMO_GUIDE.md",
+    "docs/demo/FACULTY_DEMONSTRATION_SCRIPT.md",
+    "docs/demo/screenshots/01_initial.png",
+    "docs/demo/screenshots/02_filled_input.png",
+    "docs/demo/screenshots/03_highlighted_output.png",
+    "docs/demo/screenshots/04_entity_table.png",
+    "docs/demo/screenshots/05_model_information.png",
+    "docs/progress/MILESTONE_2D_CRF_DEMO.md",
+    "reports/demo/browser_checks.json",
+    "reports/demo/completion.json",
+    "reports/demo/dependencies.json",
+    "reports/demo/original_example_predictions.json",
+    "reports/demo/pytest.xml",
+    "reports/demo/runtime_verification.json",
+    "requirements-demo.txt",
+    "src/inference/crf_predictor.py",
+    "src/inference/entity_formatter.py",
+    "src/inference/exporter.py",
+    "src/inference/text_preprocessor.py",
+    "tests/test_demo.py",
+    "tests/test_demo_app.py"
+  ],
+  "issues": [],
+  "screenshots_verified": [
+    {
+      "path": "docs/demo/screenshots/01_initial.png",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    {
+      "path": "docs/demo/screenshots/02_filled_input.png",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    {
+      "path": "docs/demo/screenshots/03_highlighted_output.png",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    {
+      "path": "docs/demo/screenshots/04_entity_table.png",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    {
+      "path": "docs/demo/screenshots/05_model_information.png",
+      "size": [
+        527,
+        734
+      ]
+    }
+  ],
+  "frozen_file_changes": [],
+  "credential_scan": "No common key patterns found; heuristic only",
+  "oversized_artifacts": false
+}

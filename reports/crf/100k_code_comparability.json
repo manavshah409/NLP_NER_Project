@@ -1,0 +1,8 @@
+{
+  "changed_source_files": [
+    "src/training/train_crf.py"
+  ],
+  "worker_function_unchanged": true,
+  "all_other_source_files_unchanged": true,
+  "reason": "Enable authorised 100k size and preserve per-run source snapshot; no modeling changes"
+}

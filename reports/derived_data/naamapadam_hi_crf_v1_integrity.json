@@ -1,0 +1,11 @@
+{
+  "raw_checksum_preserved": true,
+  "derived_checksum_verified": true,
+  "zero_invalid_BIO": true,
+  "zero_cross_split_overlap": true,
+  "no_clean_empty_records": true,
+  "source_content_verified": true,
+  "official_test_preserved": true,
+  "zero_exact_duplicates": true,
+  "complete_source_index_accounting": true
+}
