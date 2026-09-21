@@ -1,0 +1,15 @@
+{
+  "method": "SHA256 of UTF-8 canonical JSON mapping relative POSIX file paths to SHA256; sorted keys, no spaces, ensure_ascii=False; manifest stored outside root",
+  "files": {
+    "best_model.pt": "41d12bab83effdd8d885bbf0d16a57f694cff26303383a1c92840911f48dc7e4",
+    "environment.json": "11b71d4fbddde96cba97401c2dbea5b75566090ef5b0acc8e217faffd5d54f3b",
+    "last_model.pt": "6587a14343ac78c4051b373ab67cf4bdb8d6473e623964e0a8cc6f0599bcb149",
+    "model_card.md": "546ffa9f7e009287db7d1eac44e6d9334bf359a29e15418e3025355a2e5aa579",
+    "resolved_config.yaml": "b2772101594501140d3dbb67b01e58b49e0d10731cca4d20bae0ba6fb99f49e6",
+    "sample_manifest.json": "2ab6d052cb5419d9a82a312e64db698820593330efe4ca3dd4216e1e532665a4",
+    "training_history.json": "23e5316e7001718ba02660fc382fb3d9203fd7bfe30bcda702cd678179fc712f",
+    "validation_metrics.json": "3f7e2dc65f58b8f2a20c6363008ed91aa54333d92143edd80ea308ce433b26d0",
+    "vocabulary.json": "7c36702cafed4a4ce27aa0a069595c17e45566a40cbc446499df834bdf65856d"
+  },
+  "combined_sha256": "a1e3719dc57aa1999d0e947429ba9c2b8005b70562edbe615f2a18cbbf2c39cb"
+}

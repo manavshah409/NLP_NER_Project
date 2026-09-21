@@ -1,0 +1,40 @@
+{
+  "strict_entity_precision": 0.7033197743078337,
+  "strict_entity_recall": 0.5525203587259045,
+  "strict_entity_micro_f1": 0.6188661817342107,
+  "strict_entity_macro_f1": 0.6121125547545025,
+  "per_class": {
+    "PER": {
+      "precision": 0.7196723151161486,
+      "recall": 0.6351391502426463,
+      "f1": 0.6747685185185186,
+      "true_positive": 6413,
+      "predicted": 8911,
+      "support": 10097
+    },
+    "ORG": {
+      "precision": 0.6008389803162311,
+      "recall": 0.39918533604887985,
+      "f1": 0.4796805564500548,
+      "true_positive": 3724,
+      "predicted": 6198,
+      "support": 9329
+    },
+    "LOC": {
+      "precision": 0.7664431261284498,
+      "recall": 0.6141366125865454,
+      "f1": 0.6818885892949343,
+      "true_positive": 5943,
+      "predicted": 7754,
+      "support": 9677
+    }
+  },
+  "token_accuracy": 0.9068710195205302,
+  "tokens": 289695,
+  "policy": "Only B starts a span; exact boundaries and type; macro includes all 3 types",
+  "records_evaluated": 12896,
+  "split_evaluated": "validation_clean",
+  "evaluation_seconds": 60.010185042003286,
+  "median_latency_ms": 4.616567687207862,
+  "p95_latency_ms": 5.507622374807397
+}

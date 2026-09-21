@@ -41,3 +41,18 @@ is preserved unchanged. See docs/progress/MILESTONE_2D_CLOSURE.md for developmen
 isolation and restoration; the binary is not redistributed pending licensing
 clarification. Validation F1 is 0.713769728; main clean-test F1 is 0.745063624.
 Current-news performance remains independently unverified.
+
+## Milestone 3A BiLSTM-CRF neural pilot addendum
+
+The PyTorch BiLSTM-CRF baseline architecture is implemented and evaluated
+strictly on `validation_clean` across controlled sample sizes:
+
+- **1k Smoke:** Val Micro F1: 0.367977 | Val Macro F1: 0.365004 | Vocab: 5,879 | Val UNK: 17.14%
+- **10k Pilot A:** Val Micro F1: 0.618866 | Val Macro F1: 0.612113 | Vocab: 23,894 | Val UNK: 6.48%
+- **50k Pilot B:** Val Micro F1: **0.719230** | Val Macro F1: **0.715036** | Vocab: 62,099 | Val UNK: 3.37%
+
+The 50k BiLSTM-CRF model outperforms the frozen 100k CRF baseline (0.713770)
+by +0.55 percentage points on validation micro F1 with half the training data
+and peak memory RSS of 0.989 GiB. Evaluated strictly on `validation_clean`;
+no test data accessed. See docs/progress/MILESTONE_3A_BILSTM_CRF.md.
+

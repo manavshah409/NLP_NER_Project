@@ -6,7 +6,16 @@ from src.development_guard import install
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--module', choices=['src.training.train_crf', 'src.evaluation.evaluate_crf'], required=True)
+    parser.add_argument(
+        '--module',
+        choices=[
+            'src.training.train_crf',
+            'src.evaluation.evaluate_crf',
+            'src.training.train_bilstm_crf',
+            'src.evaluation.evaluate_bilstm_crf',
+        ],
+        required=True,
+    )
     args, rest = parser.parse_known_args()
     install()
     import sys

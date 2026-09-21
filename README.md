@@ -157,3 +157,21 @@ for supported guarded development commands, their limits and model restoration.
 The model binary and all datasets are excluded from this repository. A fresh
 clone requires the exact original model from an authorised holder before running
 the demo. Current-news performance has not been independently verified.
+
+## Milestone 3A: Neural BiLSTM-CRF Baseline Pilot
+
+A PyTorch-based BiLSTM-CRF sequence tagging pipeline is implemented with a custom
+Linear-Chain CRF layer, training-only vocabulary builder, and sealed validation-only
+evaluation. All runs use Apple Silicon MPS acceleration.
+
+| Sample Size | Val Micro F1 | Val Macro F1 | PER F1 | ORG F1 | LOC F1 | Best Epoch | Peak Memory |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| 1,000 | 0.367977 | 0.365004 | 0.3871 | 0.2501 | 0.4579 | 14 | 0.684 GiB |
+| 10,000 | 0.618866 | 0.612113 | 0.6748 | 0.4797 | 0.6819 | 13 | 0.787 GiB |
+| **50,000** | **0.719230** | **0.715036** | **0.7587** | **0.6123** | **0.7741** | **14** | **0.989 GiB** |
+
+The 50k BiLSTM-CRF outperforms the frozen 100k classical CRF baseline (0.713770)
+by +0.55 percentage points on validation micro F1 with half the training data.
+All 122 tests pass. See [Milestone 3A Progress Report](docs/progress/MILESTONE_3A_BILSTM_CRF.md)
+and [BiLSTM-CRF Guide](docs/bilstm_crf/BILSTM_CRF_GUIDE.md).
+

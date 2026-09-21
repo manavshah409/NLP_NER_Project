@@ -1,6 +1,14 @@
 # Changelog
 
-## Milestone 2D
+## Milestone 3A
+
+- Implemented PyTorch BiLSTM-CRF sequence tagger with custom Linear-Chain CRF module.
+- Built training-only vocabulary builder, dataset collator with boolean sequence masks.
+- Added guarded development support and strict validation-only evaluator.
+- Conducted controlled pilot scaling: 1k (F1: 0.3680), 10k (F1: 0.6189), and 50k (F1: 0.7192).
+- Verified 50k BiLSTM-CRF surpasses frozen 100k CRF baseline (0.7138) by +0.55 pp.
+- Added 12 new unit and integration tests; all 122 tests pass.
+
 
 - Added the local Streamlit demo for the frozen 100k CRF.
 - Added Unicode tokenisation, exclusive offsets, safe highlights, counts and JSON/CSV exports.
