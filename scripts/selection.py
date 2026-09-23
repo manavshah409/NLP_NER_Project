@@ -4,8 +4,9 @@ from pathlib import Path
 from typing import Dict, List, Optional
 from src.utils.io import read_json
 
-FROZEN_CRF_VAL_PRECISION = 0.7490059530278788
-FROZEN_CRF_VAL_RECALL = 0.6817215383921868
+# Frozen 100k Classical CRF baseline metrics on validation_clean (from reports/crf/crf_100k_seed42_24dd05e84a26/validation_metrics.json)
+FROZEN_CRF_VAL_PRECISION = 0.7401476014760148
+FROZEN_CRF_VAL_RECALL = 0.6892072982166787
 FROZEN_CRF_VAL_MICRO_F1 = 0.7137697275946124
 FROZEN_CRF_VAL_MACRO_F1 = 0.7093174520741674
 FROZEN_CRF_PER_F1 = 0.7516310119860417
@@ -47,7 +48,7 @@ def generate_final_selection_report(selected_model_id: str = "bilstm_crf_100k_se
             "token_accuracy": FROZEN_CRF_TOKEN_ACC,
             "delta_micro_f1_vs_crf": 0.0,
             "best_epoch": "N/A (L-BFGS)",
-            "train_seconds": 38.3,
+            "train_seconds": 368.14,
             "peak_rss_gb": 2.658,
             "median_latency_ms": 0.508,
             "p95_latency_ms": 1.220,
@@ -211,7 +212,7 @@ def generate_final_selection_report(selected_model_id: str = "bilstm_crf_100k_se
         "  - **Validation UNK Rate:** Reduced to **2.54%** (94,405 vocabulary tokens).",
         "  - **Token Accuracy:** **0.9336** (up from 0.9254).",
         "  - **Computational Efficiency:** Peak memory of 1.238 GiB (well below 12.0 GiB budget), 3.601 ms / sentence median inference latency.",
-        "- **Reproducibility:** 100% exact metric replay confirmed across all evaluation metrics from saved checkpoint weights.",
+        "- **Reproducibility:** 100% exact numerical metric replay confirmed across all evaluation metrics from saved checkpoint weights.",
         "",
         "## 5. Known Limitations",
         "1. **Out-of-Vocabulary Tokens:** Pure word-level embeddings still produce a 2.54% UNK rate on validation data. Subword (BPE) or character-level representations are recommended for future milestones.",

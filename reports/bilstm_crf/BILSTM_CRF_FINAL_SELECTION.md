@@ -14,7 +14,7 @@ This report documents the final validation-based model selection for Milestone 3
 
 | Model | Training Size | Seed | Strict Precision | Strict Recall | Strict Micro F1 | Strict Macro F1 | PER F1 | ORG F1 | LOC F1 | Token Acc | Delta vs CRF Baseline | Best Epoch | Train Time (s) | Peak RSS (GiB) | Median Latency (ms) | P95 Latency (ms) | Vocab Size | Val UNK Rate | Model Size (MiB) |
 | :--- | :--- | :---: | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :---: | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **Frozen Classical CRF (100k)** | 100,000 | 42 | 0.749006 | 0.681722 | **0.713770** | 0.709317 | 0.7516 | 0.6085 | 0.7678 | 0.9254 | +0.000000 | N/A (L-BFGS) | 38.3s | 2.658 GiB | 0.508 ms | 1.220 ms | N/A (features) | 0.00% | 0.77 MiB |
+| **Frozen Classical CRF (100k)** | 100,000 | 42 | 0.740148 | 0.689207 | **0.713770** | 0.709317 | 0.7516 | 0.6085 | 0.7678 | 0.9254 | +0.000000 | N/A (L-BFGS) | 368.1s | 2.658 GiB | 0.508 ms | 1.220 ms | N/A (features) | 0.00% | 0.77 MiB |
 | **BiLSTM-CRF 50k (Seed 7)** | 50,000 | 7 | 0.741788 | 0.687524 | **0.713626** | 0.708833 | 0.7532 | 0.6050 | 0.7683 | 0.9272 | -0.000144 | 14 | 2962.3s | 0.871 GiB | 3.422 ms | 4.300 ms | 62,099 | 3.37% | 24.60 MiB |
 | **BiLSTM-CRF 50k (Seed 21)** | 50,000 | 21 | 0.721857 | 0.712332 | **0.717063** | 0.710939 | 0.7521 | 0.6061 | 0.7747 | 0.9279 | +0.003293 | 14 | 3015.0s | 1.028 GiB | 3.527 ms | 4.522 ms | 62,099 | 3.37% | 24.60 MiB |
 | **BiLSTM-CRF 50k (Seed 42)** | 50,000 | 42 | 0.740164 | 0.699447 | **0.719230** | 0.715036 | 0.7587 | 0.6123 | 0.7741 | 0.9284 | +0.005460 | 14 | 2461.7s | 0.989 GiB | 4.660 ms | 5.646 ms | 62,099 | 3.37% | 24.60 MiB |
@@ -36,7 +36,7 @@ This report documents the final validation-based model selection for Milestone 3
   - **Validation UNK Rate:** Reduced to **2.54%** (94,405 vocabulary tokens).
   - **Token Accuracy:** **0.9336** (up from 0.9254).
   - **Computational Efficiency:** Peak memory of 1.238 GiB (well below 12.0 GiB budget), 3.601 ms / sentence median inference latency.
-- **Reproducibility:** 100% exact metric replay confirmed across all evaluation metrics from saved checkpoint weights.
+- **Reproducibility:** 100% exact numerical metric replay confirmed across all evaluation metrics from saved checkpoint weights.
 
 ## 5. Known Limitations
 1. **Out-of-Vocabulary Tokens:** Pure word-level embeddings still produce a 2.54% UNK rate on validation data. Subword (BPE) or character-level representations are recommended for future milestones.
