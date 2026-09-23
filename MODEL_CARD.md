@@ -56,3 +56,27 @@ by +0.55 percentage points on validation micro F1 with half the training data
 and peak memory RSS of 0.989 GiB. Evaluated strictly on `validation_clean`;
 no test data accessed. See docs/progress/MILESTONE_3A_BILSTM_CRF.md.
 
+## Milestone 3B BiLSTM-CRF robustness & freeze addendum
+
+Multi-seed robustness evaluation across seeds 7, 21, and 42 (identical 50k sample and vocabulary)
+demonstrated consistent superiority over the frozen classical CRF baseline:
+
+- **50k Seed 7:** Val Micro F1: 0.713626 | Macro F1: 0.708833
+- **50k Seed 21:** Val Micro F1: 0.717063 | Macro F1: 0.710939
+- **50k Seed 42:** Val Micro F1: 0.719230 | Macro F1: 0.715036
+- **50k 3-Seed Mean:** Val Micro F1: **0.716639** ($s_{N-1} = 0.002826$, range = $0.005604$)
+
+Following successful decision-gate verification, controlled 100k neural scaling was executed:
+
+- **100k BiLSTM-CRF (`bilstm_crf_100k_seed42_9af1d47db429`):**
+  - **Strict Micro F1:** **0.738188** (+0.024418 over 100k classical CRF; +0.018958 over 50k Seed 42)
+  - **Strict Macro F1:** **0.733398** (+0.024081 over 100k classical CRF)
+  - **Class F1:** PER: 0.7812 | ORG: 0.6352 | LOC: 0.7838
+  - **Token Accuracy:** 0.9336
+  - **Vocabulary Size:** 94,405 tokens | **Validation UNK Rate:** 2.54%
+  - **Peak Memory RSS:** 1.238 GiB on Apple Silicon MPS
+
+The 100k BiLSTM-CRF is frozen as the primary validation baseline in `reports/bilstm_crf/bilstm_crf_freeze_manifest.json`.
+Evaluation conducted strictly on `validation_clean`; sealed test splits remain untouched.
+See `docs/progress/MILESTONE_3B_BILSTM_CRF_ROBUSTNESS.md`.
+

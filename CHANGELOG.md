@@ -1,5 +1,15 @@
 # Changelog
 
+## Milestone 3B
+
+- Evaluated 50k BiLSTM-CRF multi-seed robustness across seeds 7, 21, and 42 on identical 50k sample and vocabulary.
+- Measured 50k 3-seed mean validation micro F1 of **0.716639** ($s_{N-1} = 0.002826$, range = $0.005604$), confirming consistent superiority over classical CRF (0.713770).
+- Passed all 6 conditions of the pre-specified 100k scaling decision gate.
+- Executed controlled 100k BiLSTM-CRF training on Apple Silicon MPS with seed 42, achieving **0.738188 validation strict micro F1** (+2.44 pp over classical CRF baseline).
+- Selected and froze `bilstm_crf_100k_seed42_9af1d47db429` as primary validation baseline in `reports/bilstm_crf/bilstm_crf_freeze_manifest.json` with SHA-256 envelope verification.
+- Verified 100% bitwise & numerical metric replay across all model checkpoints on `validation_clean`.
+- Expanded test suite to 129 tests (all passing). Sealed test splits remain strictly preserved.
+
 ## Milestone 3A
 
 - Implemented PyTorch BiLSTM-CRF sequence tagger with custom Linear-Chain CRF module.

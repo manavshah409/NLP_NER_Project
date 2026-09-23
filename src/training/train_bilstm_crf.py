@@ -16,18 +16,27 @@ from src.data.loader import records
 from src.evaluation.evaluate_bilstm_crf import evaluate_model
 from src.models.bilstm_crf import BiLSTM_CRF
 from src.utils.environment import environment
-from src.utils.io import checksums, digest, read_json, write_json, verify_checksums
+from src.utils.io import checksums, digest, file_hash, read_json, write_json, verify_checksums
 from src.utils.neural_resource_monitor import NeuralResourceTracker, get_device, system_diagnostics
 from src.utils.resource_monitor import limits
 from src.utils.torch_reproducibility import set_seed
 
 
-def train_bilstm_crf(size: int, config_path: str = "configs/bilstm_crf.yaml") -> dict:
-    """Train BiLSTM-CRF model for a specific sample size (1k, 10k, 50k)."""
-    if size not in (1000, 10000, 50000):
-        raise ValueError("Only 1k, 10k, and 50k training sizes are authorised for Milestone 3A")
+def train_bilstm_crf(
+    size: int,
+    config_path: str = "configs/bilstm_crf.yaml",
+    seed: Optional[int] = None,
+) -> dict:
+    """Train BiLSTM-CRF model for a specific sample size (1k, 10k, 50k, 100k) and seed."""
+    if size not in (1000, 10000, 50000, 100000):
+        raise ValueError("Only 1k, 10k, 50k, and 100k training sizes are authorised")
 
     config = yaml.safe_load(Path(config_path).read_text())
+    if seed is not None:
+        config["experiment"]["seed"] = seed
+    else:
+        seed = config["experiment"]["seed"]
+
     data_config = yaml.safe_load(Path(config["data"]["data_config"]).read_text())
     report_data_dir = Path(data_config["derived_report_dir"])
     version = data_config["derived_version"]
@@ -41,28 +50,59 @@ def train_bilstm_crf(size: int, config_path: str = "configs/bilstm_crf.yaml") ->
     if not train_clean_path.exists() or not val_clean_path.exists():
         raise FileNotFoundError("Clean training/validation datasets not found")
 
-    # Sample manifest
     manifest_dir = Path("experiments/bilstm_crf/manifests")
     manifest_dir.mkdir(parents=True, exist_ok=True)
-    sample_path = manifest_dir / f"train_{size//1000:03d}k_seed42.json"
-    sample = create_manifest(
-        sample_path,
-        train_clean_path,
-        size,
-        config["experiment"]["seed"],
-        manifest["derived_checksum"]["combined_sha256"],
-        manifest["clean_statistics"]["train_clean"],
-    )
 
-    # Set seeds
-    seed_info = set_seed(config["experiment"]["seed"])
+    # Sample manifest selection:
+    # Repeated 50k runs MUST reuse the exact same 50k seed-42 sample manifest
+    if size == 50000:
+        sample_path = manifest_dir / "train_050k_seed42.json"
+        if not sample_path.exists():
+            sample = create_manifest(
+                sample_path,
+                train_clean_path,
+                50000,
+                42,
+                manifest["derived_checksum"]["combined_sha256"],
+                manifest["clean_statistics"]["train_clean"],
+            )
+        else:
+            sample = read_json(sample_path)
+    elif size == 100000:
+        # Controlled 100k run uses nested seed 42 sample
+        sample_path = manifest_dir / "train_100k_seed42.json"
+        sample = create_manifest(
+            sample_path,
+            train_clean_path,
+            100000,
+            42,
+            manifest["derived_checksum"]["combined_sha256"],
+            manifest["clean_statistics"]["train_clean"],
+        )
+        # Verify strict nesting: 100k sample must contain all 50k sample indices
+        sample_50k = read_json(manifest_dir / "train_050k_seed40.json" if (manifest_dir / "train_050k_seed40.json").exists() else manifest_dir / "train_050k_seed42.json")
+        if not set(sample_50k["source_indices"]).issubset(set(sample["source_indices"])):
+            raise ValueError("100k sample does not strictly nest the 50k training sample")
+    else:
+        sample_path = manifest_dir / f"train_{size//1000:03d}k_seed42.json"
+        sample = create_manifest(
+            sample_path,
+            train_clean_path,
+            size,
+            42,
+            manifest["derived_checksum"]["combined_sha256"],
+            manifest["clean_statistics"]["train_clean"],
+        )
+
+    # Set seeds across Python, NumPy, PyTorch CPU, and MPS
+    seed_info = set_seed(seed)
 
     # Device selection
     device = get_device(
         preferred=config["resources"]["preferred_device"],
         allow_cpu_fallback=config["resources"]["allow_cpu_fallback"],
     )
-    print(f"[{size} records] Active device: {device}", flush=True)
+    print(f"[{size} records | Seed {seed}] Active device: {device}", flush=True)
 
     # Load sampled training records
     selected_indices = set(sample["source_indices"])
@@ -86,24 +126,41 @@ def train_bilstm_crf(size: int, config_path: str = "configs/bilstm_crf.yaml") ->
         source_split="train_clean",
     )
     unk_stats = vocab.evaluate_unknown_rate(val_records)
-    print(f"[{size} records] Vocab size: {len(vocab)}, Val UNK rate: {unk_stats['unknown_token_rate']:.4%}", flush=True)
+    print(f"[{size} records | Seed {seed}] Vocab size: {len(vocab)}, Val UNK rate: {unk_stats['unknown_token_rate']:.4%}", flush=True)
+
+    # For 50k runs, verify vocabulary matches baseline 50k vocabulary
+    if size == 50000:
+        baseline_vocab_path = Path("models/bilstm_crf/bilstm_crf_050k_seed42_1c3a3bd180d5/vocabulary.json")
+        if baseline_vocab_path.exists():
+            baseline_vocab = Vocabulary.load(baseline_vocab_path)
+            if len(vocab) != len(baseline_vocab) or vocab.token2id != baseline_vocab.token2id:
+                raise ValueError("50k vocabulary does not match approved baseline vocabulary")
 
     # Experiment identifier
     code_snapshot = {p.as_posix(): p.read_text() for p in sorted(Path("src").rglob("*.py"))}
     hash_payload = {
         "config": config,
         "size": size,
+        "seed": seed,
         "indices_sha256": sample["indices_sha256"],
         "code_sha256": digest(code_snapshot),
         "vocab_sha256": digest(vocab.token2id),
     }
-    experiment_id = f"bilstm_crf_{size//1000:03d}k_seed42_" + digest(hash_payload)[:12]
+    experiment_id = f"bilstm_crf_{size//1000:03d}k_seed{seed}_" + digest(hash_payload)[:12]
     model_dir = Path("models/bilstm_crf") / experiment_id
     report_dir = Path("reports/bilstm_crf") / experiment_id
 
+    # Check for existing completed experiment with prefix match (handling legacy seed 42)
     if (report_dir / "complete.json").exists():
         print(f"Experiment already completed: {experiment_id}", flush=True)
         return read_json(report_dir / "complete.json")
+    
+    # Check legacy seed 42 folder
+    if size == 50000 and seed == 42:
+        legacy_report = Path("reports/bilstm_crf/bilstm_crf_050k_seed42_1c3a3bd180d5/complete.json")
+        if legacy_report.exists():
+            print(f"Legacy seed 42 experiment verified at {legacy_report.parent}", flush=True)
+            return read_json(legacy_report)
 
     model_dir.mkdir(parents=True, exist_ok=True)
     report_dir.mkdir(parents=True, exist_ok=True)
@@ -147,6 +204,7 @@ def train_bilstm_crf(size: int, config_path: str = "configs/bilstm_crf.yaml") ->
     best_val_f1 = -1.0
     best_epoch = 0
     patience_counter = 0
+    early_stopping_reason = "maximum_epochs_completed"
     total_train_start = time.perf_counter()
 
     for epoch in range(1, max_epochs + 1):
@@ -186,10 +244,14 @@ def train_bilstm_crf(size: int, config_path: str = "configs/bilstm_crf.yaml") ->
         )
         val_f1 = val_metrics["strict_entity_micro_f1"]
         val_macro = val_metrics["strict_entity_macro_f1"]
+        val_loss = val_metrics.get("loss", 0.0)
 
         epoch_record = {
             "epoch": epoch,
             "train_loss": avg_train_loss,
+            "validation_loss": val_loss,
+            "validation_strict_precision": val_metrics["strict_entity_precision"],
+            "validation_strict_recall": val_metrics["strict_entity_recall"],
             "validation_strict_micro_f1": val_f1,
             "validation_strict_macro_f1": val_macro,
             "validation_per_class": val_metrics["per_class"],
@@ -199,7 +261,7 @@ def train_bilstm_crf(size: int, config_path: str = "configs/bilstm_crf.yaml") ->
         }
         training_history.append(epoch_record)
         print(
-            f"Epoch {epoch:02d}/{max_epochs:02d} | Train Loss: {avg_train_loss:.4f} | "
+            f"Epoch {epoch:02d}/{max_epochs:02d} | Train Loss: {avg_train_loss:.4f} | Val Loss: {val_loss:.4f} | "
             f"Val Micro F1: {val_f1:.6f} | Val Macro F1: {val_macro:.6f} | {epoch_duration:.1f}s",
             flush=True,
         )
@@ -216,6 +278,7 @@ def train_bilstm_crf(size: int, config_path: str = "configs/bilstm_crf.yaml") ->
         else:
             patience_counter += 1
             if patience_counter >= patience:
+                early_stopping_reason = f"early_stopping_patience_reached_at_epoch_{epoch}"
                 print(f"Early stopping triggered at epoch {epoch} (best epoch: {best_epoch} with F1: {best_val_f1:.6f})", flush=True)
                 break
 
@@ -239,9 +302,11 @@ def train_bilstm_crf(size: int, config_path: str = "configs/bilstm_crf.yaml") ->
     config_resolved.update({
         "experiment_id": experiment_id,
         "sample_size": size,
+        "seed": seed,
         "device_used": str(device),
         "seed_info": seed_info,
         "best_epoch": best_epoch,
+        "early_stopping_reason": early_stopping_reason,
         "total_train_seconds": total_train_seconds,
         "vocab_size": len(vocab),
         "val_unk_rate": unk_stats["unknown_token_rate"],
@@ -257,11 +322,11 @@ def train_bilstm_crf(size: int, config_path: str = "configs/bilstm_crf.yaml") ->
 
 ## Summary
 - **Model Type:** PyTorch BiLSTM-CRF (1 layer, 128 hidden dim per direction, 100 word embedding dim).
-- **Training Sample:** {size:,} clean training records from `naamapadam_hi_crf_v1`.
+- **Training Sample:** {size:,} clean training records from `naamapadam_hi_crf_v1` (Seed: {seed}).
 - **Vocabulary Size:** {len(vocab):,} tokens (built strictly from training sample).
 - **Validation UNK Rate:** {unk_stats['unknown_token_rate']:.4%}.
 - **Device Used:** {device}.
-- **Best Epoch:** {best_epoch} (Early stopping patience: {patience}).
+- **Best Epoch:** {best_epoch} (Early stopping patience: {patience}, Reason: {early_stopping_reason}).
 - **Total Training Time:** {total_train_seconds:.2f} seconds.
 - **Model Size:** {model_size_bytes / (1024 ** 2):.2f} MiB ({model_size_bytes:,} bytes).
 
@@ -282,14 +347,22 @@ Evaluated strictly on `validation_clean`. No test split was accessed.
 """
     (model_dir / "model_card.md").write_text(model_card, encoding="utf-8")
 
-    # Artifacts checksums
-    artifacts_checksum = checksums(model_dir)
+    # Artifacts checksums (excluding checksums.json itself)
+    artifact_files = {p.relative_to(model_dir).as_posix(): file_hash(p)
+                      for p in sorted(model_dir.rglob("*")) if p.is_file() and p.name != "checksums.json"}
+    artifacts_checksum = {
+        "method": "SHA256 of UTF-8 canonical JSON mapping relative POSIX file paths to SHA256; sorted keys, no spaces, ensure_ascii=False; manifest stored outside root",
+        "files": artifact_files,
+        "combined_sha256": digest(artifact_files),
+    }
     write_json(model_dir / "checksums.json", artifacts_checksum)
 
     summary = {
         "experiment_id": experiment_id,
         "sample_size": size,
+        "seed": seed,
         "best_epoch": best_epoch,
+        "early_stopping_reason": early_stopping_reason,
         "total_train_seconds": total_train_seconds,
         "validation_metrics": final_val_metrics,
         "training_history": training_history,
@@ -300,12 +373,13 @@ Evaluated strictly on `validation_clean`. No test split was accessed.
         "peak_rss_gb": resource_tracker.sample()["peak_rss_gb"],
     }
     write_json(report_dir / "complete.json", summary)
-    print(f"[{size} records] Experiment {experiment_id} complete! Strict Val Micro F1: {final_val_metrics['strict_entity_micro_f1']:.6f}", flush=True)
+    print(f"[{size} records | Seed {seed}] Experiment {experiment_id} complete! Strict Val Micro F1: {final_val_metrics['strict_entity_micro_f1']:.6f}", flush=True)
     return summary
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Train Hindi BiLSTM-CRF on controlled sample sizes.")
-    parser.add_argument("--size", type=int, choices=[1000, 10000, 50000], default=1000)
+    parser.add_argument("--size", type=int, choices=[1000, 10000, 50000, 100000], default=1000)
+    parser.add_argument("--seed", type=int, default=None)
     args = parser.parse_args()
-    train_bilstm_crf(args.size)
+    train_bilstm_crf(args.size, seed=args.seed)

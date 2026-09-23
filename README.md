@@ -175,3 +175,24 @@ by +0.55 percentage points on validation micro F1 with half the training data.
 All 122 tests pass. See [Milestone 3A Progress Report](docs/progress/MILESTONE_3A_BILSTM_CRF.md)
 and [BiLSTM-CRF Guide](docs/bilstm_crf/BILSTM_CRF_GUIDE.md).
 
+## Milestone 3B: BiLSTM-CRF Robustness & Final Baseline Freeze
+
+Milestone 3B evaluated 50k neural robustness across seeds 7, 21, and 42 (identical 50k sample and vocabulary), executed the 6-condition decision gate for 100k scaling, and froze the primary neural baseline:
+
+| Model Architecture | Training Records | Seed | Val Strict Micro F1 | Val Strict Macro F1 | PER F1 | ORG F1 | LOC F1 | Val Token Acc | Peak Memory | Delta vs Frozen CRF Baseline |
+| :--- | :--- | :---: | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **Frozen Classical CRF (100k)** | 100,000 | 42 | 0.713770 | 0.709317 | 0.7516 | 0.6085 | 0.7678 | 0.9254 | 2.658 GiB | baseline |
+| **BiLSTM-CRF 50k (Seed 7)** | 50,000 | 7 | 0.713626 | 0.708833 | 0.7532 | 0.6050 | 0.7683 | 0.9272 | 0.871 GiB | -0.000144 |
+| **BiLSTM-CRF 50k (Seed 21)** | 50,000 | 21 | 0.717063 | 0.710939 | 0.7521 | 0.6061 | 0.7747 | 0.9279 | 1.028 GiB | +0.003293 |
+| **BiLSTM-CRF 50k (Seed 42)** | 50,000 | 42 | 0.719230 | 0.715036 | 0.7587 | 0.6123 | 0.7741 | 0.9284 | 0.989 GiB | +0.005460 |
+| **BiLSTM-CRF 50k (3-Seed Mean)** | 50,000 | $\mu$ | **0.716639** | **0.711603** | **0.7547** | **0.6078** | **0.7723** | **0.9278** | **0.963 GiB** | **+0.002870** |
+| **BiLSTM-CRF 100k (Selected Baseline)** | **100,000** | **42** | **0.738188** | **0.733398** | **0.7812** | **0.6352** | **0.7838** | **0.9336** | **1.238 GiB** | **+0.024418** |
+
+### Key Milestone 3B Outcomes:
+* **Robustness:** 50k three-seed sample standard deviation is **0.002826** ($s_{N-1}$), establishing consistent improvement over classical CRF.
+* **Controlled 100k Scaling:** Achieved **0.738188 validation micro F1** (+2.44 pp over classical CRF; +1.90 pp over 50k Seed 42).
+* **Baseline Freeze:** Model `bilstm_crf_100k_seed42_9af1d47db429` is frozen in `reports/bilstm_crf/bilstm_crf_freeze_manifest.json` with full SHA-256 envelope verification.
+* **Sealed Data Boundary:** All evaluations were conducted strictly on `validation_clean`; test splits remain sealed.
+* **Test Suite:** All 129 tests pass. See [Milestone 3B Progress Report](docs/progress/MILESTONE_3B_BILSTM_CRF_ROBUSTNESS.md), [Robustness Report](reports/bilstm_crf/robustness_050k.md), and [Final Model Selection](reports/bilstm_crf/BILSTM_CRF_FINAL_SELECTION.md).
+
+

@@ -43,11 +43,18 @@ def evaluate_model(
     latencies_ms = []
 
     started_total = time.perf_counter()
+    total_loss = 0.0
+    num_batches = 0
     with torch.no_grad():
         for batch in loader:
             input_ids = batch["input_ids"].to(device)
             mask = batch["mask"].to(device)
+            tag_ids = batch["tag_ids"].to(device)
             gold_labels = batch["labels"]
+
+            batch_loss = model(input_ids, tags=tag_ids, mask=mask, reduction="mean")
+            total_loss += batch_loss.item()
+            num_batches += 1
 
             batch_start = time.perf_counter()
             predicted_paths = model.decode(input_ids, mask=mask)
@@ -66,6 +73,7 @@ def evaluate_model(
         "records_evaluated": len(records),
         "split_evaluated": split_name,
         "evaluation_seconds": total_time,
+        "loss": (total_loss / max(1, num_batches)) if num_batches else 0.0,
         "median_latency_ms": float(np.median(latencies_ms)) if latencies_ms else 0.0,
         "p95_latency_ms": float(np.percentile(latencies_ms, 95)) if latencies_ms else 0.0,
     })

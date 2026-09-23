@@ -1,0 +1,15 @@
+{
+  "os": "Darwin",
+  "os_version": "26.6.2",
+  "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+  "machine": "arm64",
+  "processor": "arm",
+  "python_version": "3.14.7",
+  "pytorch_version": "2.14.0",
+  "mps_built": true,
+  "mps_available": true,
+  "total_ram_bytes": 25769803776,
+  "total_ram_gb": 24.0,
+  "available_ram_bytes": 7783366656,
+  "available_ram_gb": 7.25
+}

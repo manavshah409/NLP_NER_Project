@@ -39,8 +39,49 @@ All commands must be executed through the guarded pipeline or training entry poi
 
 ### 3. Pilot B Experiment (50,000 records)
 ```sh
-.venv/bin/python -m src.training.train_bilstm_crf --size 50000
+# Baseline seed 42
+.venv/bin/python -m src.training.train_bilstm_crf --size 50000 --seed 42
+
+# Robustness repeated seeds (same 50k sample and vocabulary)
+.venv/bin/python -m src.training.train_bilstm_crf --size 50000 --seed 7
+.venv/bin/python -m src.training.train_bilstm_crf --size 50000 --seed 21
 ```
+
+### 4. Controlled 100k Experiment
+```sh
+.venv/bin/python -m src.training.train_bilstm_crf --size 100000 --seed 42
+```
+* Generates nested sample manifest `experiments/bilstm_crf/manifests/train_100k_seed42.json`.
+* Builds 94,405-token training vocabulary.
+* Saves model under `models/bilstm_crf/bilstm_crf_100k_seed42_<hash>/`.
+
+---
+
+## Robustness & Final Model Selection
+
+To compute 3-seed robustness metrics and generate comparison reports:
+```sh
+# 1. Generate 50k robustness analysis
+.venv/bin/python -m scripts.robustness_analysis
+
+# 2. Generate final model comparison and selection report
+.venv/bin/python -m scripts.selection
+```
+Outputs:
+* `reports/bilstm_crf/robustness_050k.csv` & `robustness_050k.md`
+* `reports/bilstm_crf/bilstm_crf_final_comparison.csv` & `BILSTM_CRF_FINAL_SELECTION.md`
+
+---
+
+## Freezing the Baseline Model
+
+To freeze the approved BiLSTM-CRF baseline model package:
+```sh
+.venv/bin/python -m src.evaluation.freeze_bilstm_crf --experiment-id bilstm_crf_100k_seed42_9af1d47db429
+```
+Outputs:
+* `reports/bilstm_crf/bilstm_crf_freeze_manifest.json`
+* `reports/bilstm_crf/bilstm_crf_freeze_summary.md`
 
 ---
 
@@ -50,18 +91,6 @@ To run guarded development with runtime auditing:
 ```sh
 .venv/bin/python -m scripts.development --module src.training.train_bilstm_crf --size 1000
 ```
-
----
-
-## Generating Comparison Reports
-
-To regenerate the scaling summary tables and comparison against the frozen classical CRF baseline:
-```sh
-.venv/bin/python -m scripts.compare_bilstm_crf
-```
-Outputs:
-* `reports/bilstm_crf/bilstm_crf_scaling_comparison.csv`
-* `reports/bilstm_crf/bilstm_crf_scaling_comparison.md`
 
 ---
 

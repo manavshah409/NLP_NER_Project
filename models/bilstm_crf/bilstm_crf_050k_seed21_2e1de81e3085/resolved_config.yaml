@@ -1,0 +1,55 @@
+experiment:
+  name: bilstm_crf
+  seed: 21
+data:
+  version: naamapadam_hi_crf_v1
+  train_split: train_clean
+  validation_split: validation_clean
+  sample_size: 1000
+  data_config: configs/data/naamapadam_hi.yaml
+vocabulary:
+  min_frequency: 1
+  pad_token: <PAD>
+  unknown_token: <UNK>
+model:
+  embedding_dim: 100
+  hidden_dim: 128
+  num_lstm_layers: 1
+  bidirectional: true
+  dropout: 0.3
+  character_encoder: false
+  use_crf: true
+training:
+  optimizer: adamw
+  learning_rate: 0.001
+  weight_decay: 0.01
+  batch_size: 32
+  maximum_epochs: 15
+  early_stopping_patience: 3
+  gradient_clip_norm: 5.0
+evaluation:
+  primary_metric: strict_entity_micro_f1
+  token_accuracy_secondary: true
+resources:
+  preferred_device: mps
+  allow_cpu_fallback: true
+  maximum_memory_gb: 12.0
+  stop_on_memory_limit: true
+  polling_seconds: 0.25
+  stop_fraction: 0.9
+experiment_id: bilstm_crf_050k_seed21_2e1de81e3085
+sample_size: 50000
+seed: 21
+device_used: mps
+seed_info:
+  seed: 21
+  python_hash_seed: '21'
+  torch_seed: 21
+  mps_seeded: true
+best_epoch: 14
+early_stopping_reason: maximum_epochs_completed
+total_train_seconds: 3014.954910583998
+vocab_size: 62099
+val_unk_rate: 0.03365953848012565
+model_size_bytes: 25794293
+peak_rss_gb: 1.028
