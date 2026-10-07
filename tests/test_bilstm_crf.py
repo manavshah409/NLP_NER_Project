@@ -299,16 +299,14 @@ def test_50k_sample_and_vocab_reuse_across_seeds():
         assert sample["seed"] == 42
         assert len(sample["source_indices"]) == 50000
 
-        # Verify that building vocabulary on identical 50k records is deterministic
-        from src.data.loader import records
-        train_clean = Path("data/derived/naamapadam_hi_crf_v1/train_clean.jsonl")
-        if train_clean.exists():
-            selected = set(sample["source_indices"])
-            subset = [r for r in records(train_clean) if r["source_index"] in selected]
-            v1 = Vocabulary.build_from_records(subset, source_split="train_clean")
-            v2 = Vocabulary.build_from_records(subset, source_split="train_clean")
-            assert v1.token2id == v2.token2id
-            assert len(v1) == 62099
+        # Compare saved training artifacts without reopening benchmark records.
+        directories = sorted(Path("models/bilstm_crf").glob("bilstm_crf_050k_seed*"))
+        assert len(directories) == 3
+        vocabularies = [Vocabulary.load(d / "vocabulary.json") for d in directories]
+        assert all(len(v) == 62099 for v in vocabularies)
+        assert all(v.token2id == vocabularies[0].token2id for v in vocabularies)
+        for directory in directories:
+            assert read_json(directory / "sample_manifest.json")["source_indices"] == sample["source_indices"]
 
 
 # -----------------------------------------------------------------------------
@@ -404,9 +402,11 @@ def test_bilstm_crf_freeze_seal_and_tampering(tmp_path):
 
 
 def test_generated_bilstm_crf_freeze_manifest_on_disk():
-    from src.evaluation.freeze_bilstm_crf import MANIFEST, verify_freeze
-    if MANIFEST.exists():
-        payload = verify_freeze(MANIFEST)
+    from src.inference.runtime_verification import ROOT, NEURAL_MANIFEST, verify_neural_runtime, verify_files
+    if (ROOT / NEURAL_MANIFEST).exists():
+        payload = verify_neural_runtime()
+        # Preserve complete non-data artifact checks without opening sealed split files.
+        verify_files(ROOT, payload, [name for name in payload['files'] if not name.startswith('data/')])
         assert payload["experiment_id"] == "bilstm_crf_100k_seed42_9af1d47db429"
         assert payload["seed"] == 42
         assert payload["sample_verification"]["records"] == 100000
@@ -447,9 +447,11 @@ def test_sealed_split_rejection_in_evaluator():
 
 
 def test_no_accidental_test_split_in_freeze():
-    from src.evaluation.freeze_bilstm_crf import MANIFEST, verify_freeze
-    if MANIFEST.exists():
-        payload = verify_freeze(MANIFEST)
+    from src.inference.runtime_verification import ROOT, NEURAL_MANIFEST, verify_neural_runtime, verify_files
+    if (ROOT / NEURAL_MANIFEST).exists():
+        payload = verify_neural_runtime()
+        # Preserve complete non-data artifact checks without opening sealed split files.
+        verify_files(ROOT, payload, [name for name in payload['files'] if not name.startswith('data/')])
         for filepath in payload["files"]:
             assert "test_clean" not in filepath or "test_clean.jsonl" in filepath
             assert "test_clean_predictions" not in filepath

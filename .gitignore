@@ -33,6 +33,7 @@ secrets.toml
 venv/
 .mypy_cache/
 .ruff_cache/
+models/language_tools/**
 *.tmp
 *.log
 *.zip

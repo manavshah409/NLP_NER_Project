@@ -1,5 +1,21 @@
 # Changelog
 
+## 2026-10-07 — Milestone 3C and initial language tools (unreleased)
+
+- Completed the dual-model Hindi Streamlit interface, frozen neural inference
+  adapter, common output schema, exact offsets, cached models and comparison exports.
+- Verified pinned manifests and every non-dataset frozen artifact without accessing
+  sealed dataset files; retained both frozen models and their environment unchanged.
+- Corrected inherited checksum tests that previously opened sealed datasets; added
+  a dataset-access guard and artifact-only vocabulary reuse checks.
+- Added isolated, offline English NER and Hindi → English translation, with pinned
+  model files, dependency lock, input limits and original-text export support.
+- Documented observed translation name/place corruption and kept quality claims
+  separate from Hindi validation. No retraining, IndicBERT or final test evaluation.
+- Added model documentation, progress reports, demonstration guide and verified
+  screenshots. Final test evidence is in docs/progress/MILESTONE_3C_VERIFICATION.md.
+
+
 ## Milestone 3B
 
 - Evaluated 50k BiLSTM-CRF multi-seed robustness across seeds 7, 21, and 42 on identical 50k sample and vocabulary.

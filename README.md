@@ -1,16 +1,40 @@
 # IndicNewsNER
 
 Fourth-year undergraduate project: named entity recognition for Indian news.
-The current implementation focuses on Hindi and the PER, ORG and LOC types.
-English, neural models and the demonstration interface are future milestones.
+Two frozen Hindi baselines (Classical CRF and BiLSTM-CRF) support PER, ORG and LOC
+through a Streamlit comparison application. Optional English NER and Hindi → English
+translation now run locally in a separate environment. Translation is experimental
+and has demonstrated name/place corruption; no English or translation quality score
+is claimed.
 Naamapadam contains multiple domains and is not exclusively an Indian-news dataset.
 
 The data checkpoint and authorised CRF scaling milestone are complete. Strict
 validation micro F1 is 0.518881 at 1k, 0.638999 at 10k, 0.695146 at 50k and
 0.713770 at the approved 100k scale.
-All 66 tests pass. See [completion report](reports/milestone_2b_completion.md),
+The historical Milestone 2B suite had 66 passing tests. See [completion report](reports/milestone_2b_completion.md),
 [scaling comparison](reports/crf/crf_scaling_comparison.md) and
 [data checkpoint](reports/checkpoint_milestones_1_2a.md). The current recommendation is to stop CRF scaling at 100k. Both test splits were subsequently evaluated once under the approved Milestone 2C freeze.
+
+## Current application (2026-10-07)
+
+Run `.venv/bin/python -m streamlit run app.py --browser.gatherUsageStats false`.
+The main page offers Classical CRF, BiLSTM-CRF and Compare Both; the sidebar adds
+English and Translation. Original model weights are local and excluded from Git.
+Hindi validation micro F1 is 0.713769728 (CRF) and 0.738188290 (BiLSTM-CRF).
+Validation and historical clean-test results are separate; no neural final test
+was run. Current-news performance remains unverified.
+
+- [Dual-model guide and faculty script](docs/demo/DUAL_MODEL_DEMO_GUIDE.md)
+- [Optional English/translation installation](docs/demo/LANGUAGE_TOOLS.md)
+- [Milestone 3C closure](docs/progress/MILESTONE_3C_DUAL_MODEL_DEMO.md)
+- [Final verification](docs/progress/MILESTONE_3C_VERIFICATION.md)
+- [Model-card addendum](docs/MODEL_CARD_DEMO_ADAPTERS.md)
+- [Initial language integration](docs/progress/MILESTONE_4A_LANGUAGE_TOOLS.md)
+
+The frozen environment and both Hindi manifests are unchanged. The test suite
+blocks actual dataset reads. Historical preparation/training commands below are
+archival: future development must install the process guard before any data access
+and must not reopen sealed evaluation records.
 
 ## Setup
 
@@ -26,9 +50,9 @@ python3 -m venv .venv
 .venv/bin/python -m pytest
 ```
 
-PyTorch, Transformers, Accelerate and Evaluate are deferred until their approved
-milestones; they are not needed for classical CRF. Their compatible versions and
-MPS support must be checked then. Strict evaluation is implemented locally and
+PyTorch is installed separately at the frozen neural version (2.14.0) for the
+BiLSTM-CRF. The optional language tools use a separate Python 3.12 environment and
+requirements-language.lock.txt; do not install that lock into the Hindi environment. Strict evaluation is implemented locally and
 tested directly, so seqeval is not required.
 
 ## Reproduce data preparation
@@ -129,7 +153,7 @@ The 100k baseline is frozen. Each test split was evaluated once, without trainin
 | test_clean | 0.745063624 | 0.732890036 |
 | official_test | 0.766889186 | 0.759028464 |
 
-The clean result is the main Naamapadam conclusion. The official result is a separate overlapping/raw-BIO benchmark comparison. All 66 tests pass. See [final report](reports/crf/CRF_BASELINE_FINAL_REPORT.md). Full-precision metrics are in the JSON reports.
+The clean result is the main Naamapadam conclusion. The official result is a separate overlapping/raw-BIO benchmark comparison. The historical Milestone 2B suite had 66 passing tests. See [final report](reports/crf/CRF_BASELINE_FINAL_REPORT.md). Full-precision metrics are in the JSON reports.
 
 ## Local CRF demonstration — Milestone 2D
 
